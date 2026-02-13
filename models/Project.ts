@@ -6,6 +6,7 @@ export interface IProject extends Document {
     category: string;
     image?: string;
     technologies?: string[];
+    link?: string;
     status: 'active' | 'completed' | 'in-progress';
     createdAt: Date;
     updatedAt: Date;
@@ -32,6 +33,9 @@ const ProjectSchema: Schema = new Schema(
         technologies: {
             type: [String],
             default: [],
+        },
+        link: {
+            type: String,
         },
         status: {
             type: String,
