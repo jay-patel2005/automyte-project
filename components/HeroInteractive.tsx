@@ -275,8 +275,8 @@ const ControlPanel = ({
                             key={mode}
                             onClick={() => setSystemMode(mode)}
                             className={`px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${systemMode === mode
-                                    ? "bg-brand-accent text-brand-bg shadow-[0_0_20px_rgba(0,242,255,0.5)]"
-                                    : "bg-white/5 text-slate-400 hover:bg-white/10"
+                                ? "bg-brand-accent text-brand-bg shadow-[0_0_20px_rgba(0,242,255,0.5)]"
+                                : "bg-white/5 text-slate-400 hover:bg-white/10"
                                 }`}
                         >
                             {mode}
@@ -383,13 +383,17 @@ const HeroInteractive = () => {
     return (
         <section
             ref={containerRef}
-            className="relative min-h-screen flex items-center pt-20 px-6 overflow-hidden py-32"
+            className="relative min-h-screen flex items-center pt-20 px-6 overflow-hidden py-32 bg-no-repeat bg-cover bg-center"
             id="home"
+            style={{ backgroundImage: "url('/hero-bg.png')" }}
         >
-            {/* Background Ambient Glow */}
-            <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-accent/20 blur-[80px] rounded-full animate-glow-pulse transform-gpu will-change-transform" />
+            {/* Background Overlay for readability */}
+            <div className="absolute inset-0 bg-brand-bg/80 z-0"></div>
 
-            <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+            {/* Background Ambient Glow */}
+            <div className="absolute top-1/4 -left-20 w-96 h-96 bg-brand-accent/20 blur-[80px] rounded-full animate-glow-pulse transform-gpu will-change-transform z-0" />
+
+            <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-start relative z-10">
                 {/* Left: Text Content */}
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
@@ -397,11 +401,6 @@ const HeroInteractive = () => {
                     transition={{ duration: 1, delay: 0.2 }}
                     className="space-y-8"
                 >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-accent/30 bg-brand-accent/10 text-brand-accent text-xs font-bold tracking-[0.2em] uppercase">
-                        <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
-                        Next-Gen Engineering
-                    </div>
-
                     <h1 className="text-6xl md:text-8xl font-bold leading-[0.95] tracking-tighter">
                         Architecting <br />
                         <span className="text-brand-accent">Autonomous</span>
@@ -458,18 +457,6 @@ const HeroInteractive = () => {
                             )}
                         </AnimatePresence>
                     </div>
-
-                    {/* Control Panel */}
-                    <ControlPanel
-                        rotation={rotation}
-                        zoom={zoom}
-                        autoRotate={autoRotate}
-                        setAutoRotate={setAutoRotate}
-                        exploded={exploded}
-                        setExploded={setExploded}
-                        systemMode={systemMode}
-                        setSystemMode={setSystemMode}
-                    />
                 </div>
             </div>
         </section>
