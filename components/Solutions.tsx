@@ -2,9 +2,10 @@
 
 import React, { useRef, useMemo, useState, useEffect, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, PerspectiveCamera, Preload } from "@react-three/drei";
-import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
+import { PerspectiveCamera, Preload } from "@react-three/drei";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import * as THREE from "three";
+import Image from "next/image";
 
 // --- Components ---
 
@@ -81,43 +82,19 @@ const BackgroundNode = React.memo(() => {
 
 BackgroundNode.displayName = "BackgroundNode";
 
-const Card3DBackground = React.memo(({ active }: { active: boolean }) => {
-    const meshRef = useRef<THREE.Mesh>(null);
-
-    useFrame((state) => {
-        if (meshRef.current) {
-            meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
-            meshRef.current.rotation.y = Math.cos(state.clock.elapsedTime * 0.5) * 0.1;
-        }
-    });
-
-    return (
-        <mesh ref={meshRef}>
-            <planeGeometry args={[5, 5, 32, 32]} />
-            <MeshDistortMaterial
-                color="#00f2ff"
-                speed={active ? 3 : 1}
-                distort={active ? 0.3 : 0.1}
-                radius={1}
-                transparent
-                opacity={0.1}
-                wireframe
-            />
-        </mesh>
-    );
-});
-
-Card3DBackground.displayName = "Card3DBackground";
-
 const SolutionCard = ({
     title,
     description,
     features,
+    image,
+    cta,
     index
 }: {
     title: string;
     description: string;
     features: string[];
+    image: string;
+    cta: string;
     index: number;
 }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -164,39 +141,42 @@ const SolutionCard = ({
             style={{
                 perspective: 1000,
             }}
-            className="relative group"
+            className="relative group h-full"
         >
-            <div className="absolute inset-0 -z-10 pointer-events-none opacity-40 transform-gpu overflow-hidden">
-                <SafeCanvas>
-                    <PerspectiveCamera makeDefault position={[0, 0, 3]} />
-                    <ambientLight intensity={0.5} />
-                    <pointLight position={[10, 10, 10]} intensity={1} color="#00f2ff" />
-                    <Card3DBackground active={isHovered} />
-                </SafeCanvas>
-            </div>
-
             <motion.div
                 style={{
                     rotateX: rotateX,
                     rotateY: rotateY,
                     transformStyle: "preserve-3d",
                 }}
-                className={`relative h-full glass-morphism p-8 rounded-twelve border border-white/5 transition-colors duration-500 overflow-hidden transform-gpu backface-hidden ${isHovered ? "border-brand-accent/40" : ""
+                className={`relative h-full glass-morphism p-8 rounded-twelve border border-white/5 transition-all duration-500 overflow-hidden transform-gpu backface-hidden ${isHovered ? "border-brand-accent/40" : ""
                     }`}
             >
+                {/* Background Image with Overlay */}
+                <div className="absolute inset-0 -z-10 bg-slate-950/70 group-hover:bg-slate-950/50 transition-colors duration-500" />
+                <div className="absolute inset-0 -z-20 overflow-hidden rounded-twelve">
+                    <Image
+                        src={image}
+                        alt={title}
+                        fill
+                        className={`object-cover transition-transform duration-700 ease-out ${isHovered ? "scale-110" : "scale-100"}`}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent transition-opacity duration-300" />
+                </div>
 
                 {/* Content */}
-                <div className="relative z-10 space-y-6">
+                <div className="relative z-10 space-y-6 flex flex-col h-full">
                     <div className="space-y-2">
                         <div className={`w-12 h-1 bg-brand-accent transition-all duration-500 ${isHovered ? "w-24" : "w-12"}`} />
                         <h3 className="text-2xl font-bold tracking-tight text-white">{title}</h3>
                     </div>
 
-                    <p className="text-slate-400 text-sm leading-relaxed min-h-[60px]">
+                    <p className="text-slate-300 text-sm leading-relaxed min-h-[60px]">
                         {description}
                     </p>
 
-                    <div className="space-y-3 pt-4 border-t border-white/5">
+                    <div className="space-y-3 pt-4 border-t border-white/10 flex-grow">
                         {features.map((feature, i) => (
                             <motion.div
                                 key={i}
@@ -215,9 +195,9 @@ const SolutionCard = ({
 
                     <motion.button
                         whileHover={{ x: 5 }}
-                        className="flex items-center gap-2 text-brand-accent text-xs font-bold uppercase tracking-widest pt-4 group-hover:gap-4 transition-all"
+                        className="flex items-center gap-2 text-brand-accent text-xs font-bold uppercase tracking-widest pt-4 group-hover:gap-4 transition-all mt-auto"
                     >
-                        Explore Module
+                        {cta}
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path d="M17 8l4 4m0 0l-4 4m4-4H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
                         </svg>
@@ -239,44 +219,52 @@ const Solutions = () => {
 
     const solutionsData = [
         {
-            title: "Smart Toll Automation",
-            description: "High-speed AI-powered toll systems designed for seamless traffic flow and real-time vehicle intelligence.",
+            title: "Modern Website Development",
+            description: "High-performance responsive websites that convert and scale.",
             features: [
-                "Computer vision vehicle detection",
-                "Automatic barrier systems",
-                "Revenue analytics",
-                "Cloud monitoring"
-            ]
+                "Corporate Websites",
+                "Landing Pages",
+                "SEO Optimization",
+                "Performance Focus"
+            ],
+            image: "/webdev.png",
+            cta: "Explore Websites"
         },
         {
-            title: "Industrial Process Automation",
-            description: "Advanced PLC and robotic system integration for optimized operations.",
+            title: "Web Applications & SaaS",
+            description: "Custom dashboards and business systems tailored to your operations.",
             features: [
-                "Industrial controllers",
-                "Robotics coordination",
-                "Live dashboards",
-                "Predictive maintenance"
-            ]
+                "HR Systems",
+                "Admin Panels",
+                "CRM Platforms",
+                "Secure Access Control"
+            ],
+            image: "/webapp.png",
+            cta: "View Web Apps"
         },
         {
-            title: "AI Surveillance & Monitoring",
-            description: "Computer vision systems built for intelligent monitoring environments.",
+            title: "E-commerce Platforms",
+            description: "Conversion-focused online stores built for scalability.",
             features: [
-                "License plate recognition",
-                "Behavior detection",
-                "Edge AI inference",
-                "Central command dashboards"
-            ]
+                "Product Management",
+                "Payment Integration",
+                "Multi-Vendor Setup",
+                "Analytics"
+            ],
+            image: "/ecom.png",
+            cta: "Explore E-commerce"
         },
         {
-            title: "IoT & Edge Infrastructure",
-            description: "Scalable IoT ecosystems connecting distributed automation networks.",
+            title: "Business Automation",
+            description: "Automate operations and connect systems using smart workflows.",
             features: [
-                "Edge-to-cloud architecture",
-                "Secure API integration",
-                "Microservices backend",
-                "Low-latency communication"
-            ]
+                "n8n Automation",
+                "WhatsApp Automation",
+                "API Integration",
+                "Lead Management"
+            ],
+            image: "/auto.png",
+            cta: "See Automation"
         }
     ];
 
@@ -305,7 +293,7 @@ const Solutions = () => {
                         transition={{ duration: 0.6 }}
                         className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-accent/20 bg-brand-accent/5 text-brand-accent text-[10px] font-bold tracking-[0.2em] uppercase"
                     >
-                        Frameworks & Systems
+                        Digital Transformation
                     </motion.div>
 
                     <motion.h2
@@ -315,8 +303,8 @@ const Solutions = () => {
                         transition={{ duration: 0.8, delay: 0.1 }}
                         className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-tight"
                     >
-                        Intelligent Solutions. <br />
-                        <span className="text-brand-accent">Engineered for Performance.</span>
+                        Digital Solutions. <br />
+                        <span className="text-brand-accent">Built for Modern Businesses.</span>
                     </motion.h2>
 
                     <motion.p
@@ -326,7 +314,7 @@ const Solutions = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-slate-400 text-lg md:text-xl font-medium max-w-2xl"
                     >
-                        Scalable automation architectures designed for mission-critical infrastructure and modern industrial ecosystems.
+                        We design scalable web systems and automation architectures that help businesses grow smarter.
                     </motion.p>
                 </div>
 

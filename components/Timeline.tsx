@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
 
 const steps = [
@@ -34,8 +34,9 @@ const TimelineStep = ({ step, index }: { step: typeof steps[0], index: number })
     const isLeft = step.side === "left";
 
     return (
-        <div className={`relative flex flex-col md:flex-row items-center mb-24 md:justify-between group ${!isLeft ? 'md:flex-row-reverse' : ''}`}>
-            {/* Laptop Content */}
+        <div className={`relative flex flex-col md:flex-row items-start md:items-center mb-12 md:mb-24 md:justify-between group ${!isLeft ? 'md:flex-row-reverse' : ''}`}>
+
+            {/* Desktop Content Side */}
             <motion.div
                 initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -50,30 +51,37 @@ const TimelineStep = ({ step, index }: { step: typeof steps[0], index: number })
                 </div>
             </motion.div>
 
-            {/* Center Circle */}
-            <div className="z-10 w-12 h-12 rounded-full bg-brand-bg border-4 border-brand-accent flex items-center justify-center mb-4 md:mb-0 relative">
+            {/* Center Circle / Mobile Indicator */}
+            <div className="absolute left-8 top-0 md:static md:top-auto md:left-auto z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-brand-bg border-4 border-brand-accent flex items-center justify-center -translate-x-1/2 md:translate-x-0 mt-[1.5rem] md:mt-0 shadow-[0_0_15px_rgba(0,242,255,0.5)]">
                 <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 10, delay: 0.1 }}
                     className="absolute inset-0 bg-brand-accent/20 blur-lg rounded-full animate-pulse"
                 />
-                <div className="w-3 h-3 bg-brand-accent rounded-full shadow-[0_0_15px_rgba(0,242,255,1)]" />
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 bg-brand-accent rounded-full shadow-[0_0_15px_rgba(0,242,255,1)]" />
             </div>
 
-            {/* Mobile Content & Mobile Progress Bar */}
+            {/* Mobile Content Side */}
             <motion.div
                 initial={{ opacity: 0, x: isLeft ? 50 : -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className={`w-full md:w-5/12 ${isLeft ? 'text-left pl-12 md:pl-0' : 'text-right pr-12 md:pr-0'}`}
+                className={`w-full md:w-5/12 pl-20 md:pl-0 ${isLeft ? 'md:text-left' : 'md:text-right'}`}
             >
-                <div className="md:hidden glass-morphism p-6 rounded-twelve border border-white/5 mb-4">
-                    <h4 className={`text-xl font-bold text-brand-accent mb-2 ${!isLeft ? 'text-left pl-12' : ''}`}>{step.title}</h4>
-                    <p className={`text-slate-400 text-sm mb-2 ${!isLeft ? 'text-left pl-12' : ''}`}>{step.mobileDesc}</p>
+                {/* Mobile Card */}
+                <div className="md:hidden glass-morphism p-6 rounded-twelve border border-white/5 relative overflow-hidden group-hover:border-brand-accent/30 transition-all">
+                    <span className="text-brand-accent text-[10px] font-bold tracking-widest uppercase mb-2 block">Phase 0{index + 1}</span>
+                    <h4 className="text-lg font-bold text-white mb-2">{step.title}</h4>
+                    <p className="text-slate-400 text-sm leading-relaxed">{step.mobileDesc}</p>
+
+                    {/* Glowing Accent on Left of Mobile Card */}
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-accent/50 shadow-[0_0_10px_rgba(0,242,255,0.3)]" />
                 </div>
-                <div className="w-full h-1 bg-white/5 rounded overflow-hidden">
+
+                {/* Desktop Progress Bar (Hidden on Mobile) */}
+                <div className="hidden md:block w-full h-1 bg-white/5 rounded overflow-hidden mt-6">
                     <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: "100%" }}
@@ -113,16 +121,16 @@ const Timeline = () => {
                     <p className="text-slate-400">Streamlined engineering methodology from concept to global deployment.</p>
                 </motion.div>
 
-                <div className="relative pt-12 pb-12">
+                <div className="relative pt-4 pb-12">
                     {/* Vertical Progress Line */}
-                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2 transform-gpu">
+                    <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-1/2 transform-gpu">
                         <motion.div
                             style={{ scaleY, originY: 0 }}
                             className="absolute top-0 w-full h-full bg-brand-accent shadow-[0_0_20px_rgba(0,242,255,0.8)] transform-gpu will-change-transform"
                         />
                     </div>
 
-                    <div className="space-y-12">
+                    <div className="space-y-4 md:space-y-12">
                         {steps.map((step, index) => (
                             <TimelineStep key={index} step={step} index={index} />
                         ))}

@@ -29,6 +29,9 @@ async function connectDB() {
     if (!cached.promise) {
         const opts = {
             bufferCommands: false,
+            dbName: 'automytee', // Force correct DB name from screenshot
+            serverSelectionTimeoutMS: 5000, // Fail fast if can't connect (5s instead of 30s)
+            socketTimeoutMS: 45000, // Close sockets after inactivity
         };
 
         cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {

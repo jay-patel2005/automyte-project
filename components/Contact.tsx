@@ -189,7 +189,7 @@ const Contact = () => {
         <section
             ref={sectionRef}
             id="contact"
-            className="py-32 px-6 relative overflow-hidden bg-brand-bg"
+            className="py-2 pt-10px px-6 relative overflow-hidden bg-brand-bg"
         >
             <Toaster />
             {/* Background Ambient Glow */}
@@ -251,7 +251,7 @@ const Contact = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
                             { label: "Location", val: "Gujarat, India" },
-                            { label: "Email", val: "info@automytee.tech" },
+                            { label: "Email", val: "automyte777@gmail.com" },
                             { label: "Support", val: "24/7 Tech Intel" }
                         ].map((info, i) => (
                             <motion.div
@@ -259,10 +259,19 @@ const Contact = () => {
                                 initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 + i * 0.1 }}
-                                className="p-4 glass-morphism rounded-twelve border border-white/5"
+                                className="p-4 glass-morphism rounded-twelve border border-white/5 overflow-hidden"
                             >
                                 <p className="text-[10px] uppercase tracking-widest text-brand-accent font-bold mb-1">{info.label}</p>
-                                <p className="text-sm font-semibold text-slate-200">{info.val}</p>
+                                {info.label === "Email" ? (
+                                    <a
+                                        href={`mailto:${info.val}`}
+                                        className="text-sm font-semibold text-slate-200 break-all hover:text-brand-accent transition-colors block"
+                                    >
+                                        {info.val}
+                                    </a>
+                                ) : (
+                                    <div className="text-sm font-semibold text-slate-200 break-all">{info.val}</div>
+                                )}
                             </motion.div>
                         ))}
                     </div>

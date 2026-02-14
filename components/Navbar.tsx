@@ -17,7 +17,7 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 px-6 ${isScrolled ? "glass-morphism py-3" : "py-4"
+            className={`fixed top-0 left-0 w-full z-[999] transition-all duration-500 px-6 ${isScrolled ? "glass-morphism py-3" : "py-4"
                 }`}
             id="navbar"
         >
@@ -38,9 +38,9 @@ const Navbar = () => {
                     <Link href="#contact" className="nav-link hover:text-brand-accent transition-colors">Contact</Link>
                 </div>
 
-                <button className="hidden md:block px-6 py-2 border border-brand-accent text-brand-accent rounded-twelve hover:bg-brand-accent hover:text-brand-bg transition-all duration-300 text-sm font-semibold">
+                <Link href="#contact" className="hidden md:block px-6 py-2 border border-brand-accent text-brand-accent rounded-twelve hover:bg-brand-accent hover:text-brand-bg transition-all duration-300 text-sm font-semibold">
                     Get Started
-                </button>
+                </Link>
 
                 {/* Mobile Toggle */}
                 <button
@@ -56,7 +56,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Drawer */}
             <div
-                className={`fixed inset-0 z-[60] bg-brand-bg/95 backdrop-blur-lg transition-transform duration-500 md:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+                className={`fixed inset-0 z-[60] bg-gray-900 transition-transform duration-300 ease-out md:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
                     }`}
             >
                 <div className="flex flex-col h-full p-8">
@@ -83,9 +83,9 @@ const Navbar = () => {
                         <Link href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-brand-accent transition-colors">Projects</Link>
                         <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-brand-accent transition-colors">Contact</Link>
                     </div>
-                    <button className="mt-auto px-6 py-4 bg-brand-accent text-brand-bg rounded-twelve font-bold uppercase tracking-widest text-sm">
+                    <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="mt-auto px-6 py-4 bg-brand-accent text-brand-bg rounded-twelve font-bold uppercase tracking-widest text-sm text-center">
                         Get Started
-                    </button>
+                    </Link>
                 </div>
             </div>
         </nav>

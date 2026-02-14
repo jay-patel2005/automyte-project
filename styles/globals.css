@@ -103,6 +103,12 @@ body::before {
   background: linear-gradient(to bottom, transparent, #00f0ff, transparent);
 }
 
+.pattern-grid {
+  background-image: linear-gradient(rgba(0, 242, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
 @layer utilities {
   .selection-bg-brand-accent::selection {
     background-color: #00f2ff;
