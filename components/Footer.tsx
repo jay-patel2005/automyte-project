@@ -37,9 +37,11 @@ const Footer = () => {
 
                     {/* Brand - Left */}
                     <div className="flex items-center gap-3 justify-center md:justify-start">
-                        <div className="w-10 h-10 bg-brand-accent rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(0,240,255,0.2)]">
-                            <span className="text-brand-bg font-bold text-xl">A</span>
-                        </div>
+                        <img
+                            src="/atlogo.png"
+                            alt="Automytee Logo"
+                            className="h-10 w-auto object-contain mix-blend-screen"
+                        />
                         <span className="text-2xl font-bold tracking-tight text-white">Automytee</span>
                     </div>
 
