@@ -248,7 +248,7 @@ const Contact = () => {
                     </div>
 
                     {/* Contact Info Chips */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                         {[
                             { label: "Location", val: "Gujarat, India" },
                             { label: "Email", val: "automyte777@gmail.com" },
@@ -259,18 +259,18 @@ const Contact = () => {
                                 initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 + i * 0.1 }}
-                                className="p-4 glass-morphism rounded-twelve border border-white/5 overflow-hidden"
+                                className="p-3 glass-morphism rounded-twelve border border-white/5 overflow-hidden"
                             >
                                 <p className="text-[10px] uppercase tracking-widest text-brand-accent font-bold mb-1">{info.label}</p>
                                 {info.label === "Email" ? (
                                     <a
                                         href={`mailto:${info.val}`}
-                                        className="text-sm font-semibold text-slate-200 break-all hover:text-brand-accent transition-colors block"
+                                        className="text-xs font-semibold text-slate-200 whitespace-nowrap hover:text-brand-accent transition-colors block"
                                     >
                                         {info.val}
                                     </a>
                                 ) : (
-                                    <div className="text-sm font-semibold text-slate-200 break-all">{info.val}</div>
+                                    <div className="text-sm font-semibold text-slate-200 whitespace-nowrap">{info.val}</div>
                                 )}
                             </motion.div>
                         ))}
