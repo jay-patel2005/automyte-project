@@ -3,13 +3,13 @@
 import React, { useRef, useMemo, useState, useEffect, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { PerspectiveCamera, Preload } from "@react-three/drei";
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { motion, useTransform, useSpring, useMotionValue } from "framer-motion";
 import * as THREE from "three";
 import Image from "next/image";
 
 // --- Components ---
 
-const SafeCanvas = ({ children, ...props }: any) => {
+const SafeCanvas = ({ children, ...props }: React.ComponentProps<typeof Canvas>) => {
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
         setMounted(true);
@@ -40,7 +40,7 @@ const SafeCanvas = ({ children, ...props }: any) => {
 const BackgroundNode = React.memo(() => {
     const meshRef = useRef<THREE.Group>(null);
 
-    useFrame((state) => {
+    useFrame(() => {
         if (meshRef.current) {
             meshRef.current.rotation.y += 0.001;
             meshRef.current.rotation.z += 0.0005;
@@ -212,10 +212,6 @@ const SolutionCard = ({
 
 const Solutions = () => {
     const sectionRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: sectionRef,
-        offset: ["start end", "end start"],
-    });
 
     const solutionsData = [
         {
@@ -336,4 +332,3 @@ const Solutions = () => {
 };
 
 export default Solutions;
-

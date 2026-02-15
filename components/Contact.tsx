@@ -206,7 +206,7 @@ const Contact = () => {
                             viewport={{ once: true }}
                             className="text-4xl md:text-6xl font-bold leading-tight"
                         >
-                            Let's Build <span className="text-brand-accent">Intelligent</span> <br />
+                            Let&apos;s Build <span className="text-brand-accent">Intelligent</span> <br />
                             Infrastructure Together
                         </motion.h2>
                         <motion.p

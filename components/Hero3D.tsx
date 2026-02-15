@@ -2,8 +2,8 @@
 
 import React, { useRef, useEffect, useState, Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera, useGLTF, Environment, Float } from "@react-three/drei";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { PerspectiveCamera, Environment, Float } from "@react-three/drei";
+import { motion, useScroll, useSpring } from "framer-motion";
 import * as THREE from "three";
 import Link from "next/link";
 
@@ -38,7 +38,6 @@ const SafeCanvas = ({ children, ...props }: React.ComponentProps<typeof Canvas>)
 // 3D Model Component with scroll-based animation
 const AnimatedModel = React.memo(({ scrollProgress }: { scrollProgress: number }) => {
     const groupRef = useRef<THREE.Group>(null);
-    const { camera } = useThree();
 
     // Smooth scroll-based rotation and position
     useFrame(() => {

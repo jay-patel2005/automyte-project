@@ -24,9 +24,9 @@ export async function GET() {
                 }
             }
         );
-    } catch (error: any) {
+    } catch (error) {
         return NextResponse.json(
-            { success: false, error: error.message },
+            { success: false, error: (error as Error).message },
             { status: 400 }
         );
     }
@@ -38,9 +38,9 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
         const project = await Project.create(body);
         return NextResponse.json({ success: true, data: project }, { status: 201 });
-    } catch (error: any) {
+    } catch (error) {
         return NextResponse.json(
-            { success: false, error: error.message },
+            { success: false, error: (error as Error).message },
             { status: 400 }
         );
     }

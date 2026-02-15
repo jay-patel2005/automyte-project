@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import HeroInteractive from "@/components/HeroInteractive";
@@ -24,10 +24,6 @@ export default function Home() {
     title: "",
     desc: ""
   });
-
-  const openModal = (title: string, desc: string) => {
-    setModalData({ isOpen: true, title, desc });
-  };
 
   const closeModal = () => {
     setModalData({ ...modalData, isOpen: false });

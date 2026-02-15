@@ -10,9 +10,9 @@ export async function GET() {
         await connectDB();
         const contacts = await Contact.find({}).sort({ createdAt: -1 });
         return NextResponse.json({ success: true, data: contacts });
-    } catch (error: any) {
+    } catch (error) {
         return NextResponse.json(
-            { success: false, error: error.message },
+            { success: false, error: (error as Error).message },
             { status: 400 }
         );
     }
@@ -24,9 +24,9 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
         const contact = await Contact.create(body);
         return NextResponse.json({ success: true, data: contact }, { status: 201 });
-    } catch (error: any) {
+    } catch (error) {
         return NextResponse.json(
-            { success: false, error: error.message },
+            { success: false, error: (error as Error).message },
             { status: 400 }
         );
     }

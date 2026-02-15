@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -44,11 +44,7 @@ export default function AdminDashboard() {
         status: 'active' as 'active' | 'completed' | 'in-progress'
     });
 
-    useEffect(() => {
-        fetchData();
-    }, [activeTab]);
-
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         setLoading(true);
         try {
             if (activeTab === 'contacts') {
@@ -64,13 +60,16 @@ export default function AdminDashboard() {
                     setProjects(data.data);
                 }
             }
-        } catch (error) {
-            console.error('Error fetching data:', error);
+        } catch {
             toast.error('Failed to load data');
         } finally {
             setLoading(false);
         }
-    };
+    }, [activeTab]);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
 
     const updateContactStatus = async (id: string, status: 'new' | 'read' | 'replied') => {
         try {
@@ -84,7 +83,7 @@ export default function AdminDashboard() {
                 toast.success('Status updated');
                 fetchData();
             }
-        } catch (error) {
+        } catch {
             toast.error('Failed to update status');
         }
     };
@@ -99,7 +98,7 @@ export default function AdminDashboard() {
                 toast.success('Contact deleted');
                 fetchData();
             }
-        } catch (error) {
+        } catch {
             toast.error('Failed to delete contact');
         }
     };
@@ -158,7 +157,7 @@ export default function AdminDashboard() {
                 });
                 fetchData();
             }
-        } catch (error) {
+        } catch {
             toast.error(editingId ? 'Failed to update project' : 'Failed to add project');
         }
     };
@@ -202,7 +201,7 @@ export default function AdminDashboard() {
                 toast.success('Project deleted');
                 fetchData();
             }
-        } catch (error) {
+        } catch {
             toast.error('Failed to delete project');
         }
     };

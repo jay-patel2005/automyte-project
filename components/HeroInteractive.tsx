@@ -206,159 +206,11 @@ const Scene3D = React.memo(({
 
 Scene3D.displayName = "Scene3D";
 
-// Control Panel Component
-const ControlPanel = ({
-    rotation,
-    zoom,
-    autoRotate,
-    setAutoRotate,
-    exploded,
-    setExploded,
-    systemMode,
-    setSystemMode
-}: {
-    rotation: number;
-    zoom: number;
-    autoRotate: boolean;
-    setAutoRotate: (val: boolean) => void;
-    exploded: boolean;
-    setExploded: (val: boolean) => void;
-    systemMode: string;
-    setSystemMode: (mode: string) => void;
-}) => {
-    const modes = ["Simulation", "Live", "Demo"];
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="glass-morphism p-6 rounded-twelve border border-brand-accent/20 space-y-6"
-        >
-            {/* Header */}
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                <h3 className="text-xl font-bold text-brand-accent">System Control</h3>
-                <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-xs text-slate-400">ONLINE</span>
-                </div>
-            </div>
-
-            {/* Live Stats */}
-            <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1">
-                    <p className="text-xs uppercase tracking-wider text-slate-500">Rotation</p>
-                    <div className="flex items-baseline gap-2">
-                        <p className="text-2xl font-bold text-brand-accent">
-                            {Math.abs(Math.round(rotation))}
-                        </p>
-                        <span className="text-xs text-slate-400">deg</span>
-                    </div>
-                </div>
-                <div className="space-y-1">
-                    <p className="text-xs uppercase tracking-wider text-slate-500">Zoom</p>
-                    <div className="flex items-baseline gap-2">
-                        <p className="text-2xl font-bold text-brand-accent">
-                            {zoom.toFixed(1)}
-                        </p>
-                        <span className="text-xs text-slate-400">x</span>
-                    </div>
-                </div>
-            </div>
-
-            {/* System Mode Selector */}
-            <div className="space-y-2">
-                <p className="text-xs uppercase tracking-wider text-slate-500">System Mode</p>
-                <div className="grid grid-cols-3 gap-2">
-                    {modes.map((mode) => (
-                        <button
-                            key={mode}
-                            onClick={() => setSystemMode(mode)}
-                            className={`px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${systemMode === mode
-                                ? "bg-brand-accent text-brand-bg shadow-[0_0_20px_rgba(0,242,255,0.5)]"
-                                : "bg-white/5 text-slate-400 hover:bg-white/10"
-                                }`}
-                        >
-                            {mode}
-                        </button>
-                    ))}
-                </div>
-            </div>
-
-            {/* Toggle Controls */}
-            <div className="space-y-3">
-                {/* Auto Rotate */}
-                <div className="flex items-center justify-between p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all group">
-                    <div className="flex items-center gap-3">
-                        <svg className="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                        </svg>
-                        <span className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors">
-                            Auto Rotate
-                        </span>
-                    </div>
-                    <button
-                        onClick={() => setAutoRotate(!autoRotate)}
-                        className={`relative w-12 h-6 rounded-full transition-all ${autoRotate ? "bg-brand-accent" : "bg-white/20"
-                            }`}
-                    >
-                        <motion.div
-                            animate={{ x: autoRotate ? 24 : 0 }}
-                            className="absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow-lg"
-                        />
-                    </button>
-                </div>
-
-                {/* Exploded View */}
-                <div className="flex items-center justify-between p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all group">
-                    <div className="flex items-center gap-3">
-                        <svg className="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                        </svg>
-                        <span className="text-sm font-semibold text-slate-300 group-hover:text-white transition-colors">
-                            Exploded View
-                        </span>
-                    </div>
-                    <button
-                        onClick={() => setExploded(!exploded)}
-                        className={`relative w-12 h-6 rounded-full transition-all ${exploded ? "bg-brand-accent" : "bg-white/20"
-                            }`}
-                    >
-                        <motion.div
-                            animate={{ x: exploded ? 24 : 0 }}
-                            className="absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow-lg"
-                        />
-                    </button>
-                </div>
-            </div>
-
-            {/* Performance Indicator */}
-            <div className="pt-4 border-t border-white/10">
-                <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs uppercase tracking-wider text-slate-500">Performance</span>
-                    <span className="text-xs font-bold text-green-400">60 FPS</span>
-                </div>
-                <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
-                    <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: "100%" }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        className="h-full bg-gradient-to-r from-brand-accent to-green-400"
-                    />
-                </div>
-            </div>
-        </motion.div>
-    );
-};
-
 const HeroInteractive = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [scrollProgress, setScrollProgress] = useState(0);
-    const [rotation, setRotation] = useState(0);
-    const [zoom, setZoom] = useState(1.0);
     const [autoRotate, setAutoRotate] = useState(false);
     const [exploded, setExploded] = useState(false);
-    const [systemMode, setSystemMode] = useState("Simulation");
 
     // Track scroll progress
     const { scrollYProgress } = useScroll({
@@ -375,7 +227,6 @@ const HeroInteractive = () => {
     useEffect(() => {
         const unsubscribe = smoothProgress.on("change", (latest) => {
             setScrollProgress(latest);
-            setZoom(1 + latest * 0.5);
         });
         return () => unsubscribe();
     }, [smoothProgress]);
@@ -437,7 +288,7 @@ const HeroInteractive = () => {
                             <Scene3D
                                 autoRotate={autoRotate}
                                 exploded={exploded}
-                                onRotationChange={setRotation}
+                                onRotationChange={() => { }}
                                 scrollProgress={scrollProgress}
                                 cameraDistance={8}
                             />
