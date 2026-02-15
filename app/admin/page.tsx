@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
@@ -390,10 +391,11 @@ export default function AdminDashboard() {
                                         />
                                         {newProject.image && (
                                             <div className="mt-2 relative h-32 w-full md:w-48 rounded-lg overflow-hidden border border-white/10 group">
-                                                <img
+                                                <Image
                                                     src={newProject.image}
                                                     alt="Preview"
-                                                    className="w-full h-full object-cover"
+                                                    fill
+                                                    className="object-cover"
                                                 />
                                                 <button
                                                     type="button"
@@ -456,11 +458,14 @@ export default function AdminDashboard() {
                                             className="glass-morphism p-6 rounded-twelve border border-white/10"
                                         >
                                             {project.image && (
-                                                <img
-                                                    src={project.image}
-                                                    alt={project.title}
-                                                    className="w-full h-48 object-cover rounded-lg mb-4"
-                                                />
+                                                <div className="relative w-full h-48 mb-4">
+                                                    <Image
+                                                        src={project.image}
+                                                        alt={project.title}
+                                                        fill
+                                                        className="object-cover rounded-lg"
+                                                    />
+                                                </div>
                                             )}
                                             <div className="flex justify-between items-start mb-2">
                                                 <h3 className="text-xl font-bold text-brand-accent">{project.title}</h3>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState, Suspense } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { PerspectiveCamera, Environment, Float } from "@react-three/drei";
 import { motion, useScroll, useSpring } from "framer-motion";
 import * as THREE from "three";

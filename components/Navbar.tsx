@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
@@ -23,11 +24,14 @@ const Navbar = () => {
         >
             <div className="max-w-7xl mx-auto flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                    <img
-                        src="/atlogo.png"
-                        alt="Automytee Logo"
-                        className="h-8 w-auto object-contain mix-blend-screen"
-                    />
+                    <div className="relative h-8 w-auto aspect-[3/1]">
+                        <Image
+                            src="/atlogo.png"
+                            alt="Automytee Logo"
+                            fill
+                            className="object-contain mix-blend-screen"
+                        />
+                    </div>
                     <span className="text-xl font-bold tracking-tight">Automytee</span>
                 </div>
 
@@ -64,11 +68,14 @@ const Navbar = () => {
                 <div className="flex flex-col h-full p-8">
                     <div className="flex justify-between items-center mb-12">
                         <div className="flex items-center gap-2">
-                            <img
-                                src="/atlogo.png"
-                                alt="Automytee Logo"
-                                className="h-8 w-auto object-contain mix-blend-screen"
-                            />
+                            <div className="relative h-8 w-auto aspect-[3/1]">
+                                <Image
+                                    src="/atlogo.png"
+                                    alt="Automytee Logo"
+                                    fill
+                                    className="object-contain mix-blend-screen"
+                                />
+                            </div>
                             <span className="text-xl font-bold tracking-tight">Automytee</span>
                         </div>
                         <button

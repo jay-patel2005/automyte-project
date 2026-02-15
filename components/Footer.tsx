@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const Footer = () => {
@@ -36,11 +37,14 @@ const Footer = () => {
 
                     {/* Brand - Left */}
                     <div className="flex items-center gap-3 justify-center md:justify-start">
-                        <img
-                            src="/atlogo.png"
-                            alt="Automytee Logo"
-                            className="h-10 w-auto object-contain mix-blend-screen"
-                        />
+                        <div className="relative h-10 w-auto aspect-[3/1]">
+                            <Image
+                                src="/atlogo.png"
+                                alt="Automytee Logo"
+                                fill
+                                className="object-contain mix-blend-screen"
+                            />
+                        </div>
                         <span className="text-2xl font-bold tracking-tight text-white">Automytee</span>
                     </div>
 
