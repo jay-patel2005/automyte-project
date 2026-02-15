@@ -209,8 +209,8 @@ Scene3D.displayName = "Scene3D";
 const HeroInteractive = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [scrollProgress, setScrollProgress] = useState(0);
-    const [autoRotate, setAutoRotate] = useState(false);
-    const [exploded, setExploded] = useState(false);
+    const [autoRotate] = useState(false);
+    const [exploded] = useState(false);
 
     // Track scroll progress
     const { scrollYProgress } = useScroll({

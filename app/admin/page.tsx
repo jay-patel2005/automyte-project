@@ -274,7 +274,7 @@ export default function AdminDashboard() {
                                         <div className="flex gap-2">
                                             <select
                                                 value={contact.status}
-                                                onChange={(e) => updateContactStatus(contact._id, e.target.value as any)}
+                                                onChange={(e) => updateContactStatus(contact._id, e.target.value as "new" | "read" | "replied")}
                                                 className="bg-brand-bg border border-white/20 rounded-lg px-3 py-1 text-sm"
                                             >
                                                 <option value="new">New</option>
@@ -414,7 +414,7 @@ export default function AdminDashboard() {
                                     />
                                     <select
                                         value={newProject.status}
-                                        onChange={(e) => setNewProject({ ...newProject, status: e.target.value as any })}
+                                        onChange={(e) => setNewProject({ ...newProject, status: e.target.value as "active" | "completed" | "in-progress" })}
                                         className="bg-brand-bg/50 border border-white/10 rounded-lg px-4 py-3 text-slate-200"
                                     >
                                         <option value="active">Active</option>
@@ -444,7 +444,7 @@ export default function AdminDashboard() {
                             projects.length === 0 ? (
                                 <div className="text-center py-20 text-slate-400">
                                     <p className="text-xl">No projects yet</p>
-                                    <p className="mt-2">Click "Add Project" to create your first project</p>
+                                    <p className="mt-2">Click &quot;Add Project&quot; to create your first project</p>
                                 </div>
                             ) : (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
