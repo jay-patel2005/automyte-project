@@ -23,16 +23,16 @@ const Navbar = () => {
             id="navbar"
         >
             <div className="max-w-7xl mx-auto flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                    <div className="relative h-8 w-auto aspect-[3/1]">
+                <div className="flex items-center gap-3">
+                    <div className="relative h-12 w-12">
                         <Image
-                            src="/atlogo.png"
+                            src="/atlogo.png?v=1"
                             alt="Automytee Logo"
                             fill
-                            className="object-contain mix-blend-screen"
+                            className="object-contain"
                         />
                     </div>
-                    <span className="text-xl font-bold tracking-tight">Automytee</span>
+                    <span className="text-2xl font-bold tracking-tight">Automytee</span>
                 </div>
 
                 {/* Desktop Menu */}
@@ -67,16 +67,16 @@ const Navbar = () => {
             >
                 <div className="flex flex-col h-full p-8">
                     <div className="flex justify-between items-center mb-12">
-                        <div className="flex items-center gap-2">
-                            <div className="relative h-8 w-auto aspect-[3/1]">
+                        <div className="flex items-center gap-3">
+                            <div className="relative h-12 w-12">
                                 <Image
-                                    src="/atlogo.png"
+                                    src="/atlogo.png?v=1"
                                     alt="Automytee Logo"
                                     fill
-                                    className="object-contain mix-blend-screen"
+                                    className="object-contain"
                                 />
                             </div>
-                            <span className="text-xl font-bold tracking-tight">Automytee</span>
+                            <span className="text-2xl font-bold tracking-tight">Automytee</span>
                         </div>
                         <button
                             className="text-brand-accent"
