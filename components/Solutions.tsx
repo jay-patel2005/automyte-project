@@ -230,9 +230,9 @@ const Solutions = () => {
             title: "Web Applications & SaaS",
             description: "Custom dashboards and business systems tailored to your operations.",
             features: [
-                "HR Systems",
+                "Web Apps",
                 "Admin Panels",
-                "CRM Platforms",
+                "custom chatbots",
                 "Secure Access Control"
             ],
             image: "/webapp.png",

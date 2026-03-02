@@ -40,7 +40,7 @@ const About = () => {
                             We are <span className="text-white font-semibold">Automyte</span> — a lean, focused team of developers and automation experts. We help businesses grow online by building fast websites, custom web apps, and smart automations.
                         </p>
                         <p>
-                            Whether you're a startup looking for your first website, or an established company wanting to automate your operations — we've got you covered. No fluff, just clean and reliable work.
+                            Whether you&apos;re a startup looking for your first website, or an established company wanting to automate your operations — we&apos;ve got you covered. No fluff, just clean and reliable work.
                         </p>
                         {/* Highlight tags */}
                         <div className="flex flex-wrap gap-2 pt-2">
