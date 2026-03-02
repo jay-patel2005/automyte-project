@@ -103,10 +103,10 @@ const Contact = () => {
     const scale = useTransform(scrollYProgress, [0, 0.2], [0.95, 1]);
 
     const projectTypes = [
-        "Smart Toll System",
-        "Industrial Automation",
+        "website",
+        "mobile app",
         "AI Monitoring",
-        "IoT Infrastructure"
+        "whatsup automation"
     ];
 
     const [formData, setFormData] = useState({
