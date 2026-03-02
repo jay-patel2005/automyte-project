@@ -252,7 +252,7 @@ const Contact = () => {
                         {[
                             { label: "Location", val: "Gujarat, India" },
                             { label: "Email", val: "automyte777@gmail.com" },
-                            { label: "Support", val: "24/7 Tech Intel" }
+                            { label: "whatsapp", val: "7698359526 || 9664900249" }
                         ].map((info, i) => (
                             <motion.div
                                 key={i}
