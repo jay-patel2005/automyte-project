@@ -252,7 +252,7 @@ const Contact = () => {
                         {[
                             { label: "Location", val: "Gujarat, India" },
                             { label: "Email", val: "automyte777@gmail.com" },
-                            { label: "whatsapp", val: "7698359526 || 9664900249" }
+                            { label: "WhatsApp", val: "7698359526 || 9664900249" }
                         ].map((info, i) => (
                             <motion.div
                                 key={i}
@@ -269,6 +269,23 @@ const Contact = () => {
                                     >
                                         {info.val}
                                     </a>
+                                ) : info.label === "WhatsApp" ? (
+                                    <div className="flex flex-col gap-1">
+                                        {info.val.split("||").map((num, idx) => {
+                                            const cleanNum = num.trim();
+                                            return (
+                                                <a
+                                                    key={idx}
+                                                    href={`https://wa.me/91${cleanNum}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-xs font-semibold text-slate-200 hover:text-brand-accent transition-colors block"
+                                                >
+                                                    {cleanNum}
+                                                </a>
+                                            );
+                                        })}
+                                    </div>
                                 ) : (
                                     <div className="text-sm font-semibold text-slate-200 whitespace-nowrap">{info.val}</div>
                                 )}

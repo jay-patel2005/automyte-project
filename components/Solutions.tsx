@@ -87,14 +87,12 @@ const SolutionCard = ({
     description,
     features,
     image,
-    cta,
     index
 }: {
     title: string;
     description: string;
     features: string[];
     image: string;
-    cta: string;
     index: number;
 }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -141,7 +139,7 @@ const SolutionCard = ({
             style={{
                 perspective: 1000,
             }}
-            className="relative group h-full"
+            className="relative group"
         >
             <motion.div
                 style={{
@@ -149,7 +147,7 @@ const SolutionCard = ({
                     rotateY: rotateY,
                     transformStyle: "preserve-3d",
                 }}
-                className={`relative h-full glass-morphism p-8 rounded-twelve border border-white/5 transition-all duration-500 overflow-hidden transform-gpu backface-hidden ${isHovered ? "border-brand-accent/40" : ""
+                className={`relative glass-morphism p-8 rounded-twelve border border-white/5 transition-all duration-500 overflow-hidden transform-gpu backface-hidden ${isHovered ? "border-brand-accent/40" : ""
                     }`}
             >
                 {/* Background Image with Overlay */}
@@ -166,7 +164,7 @@ const SolutionCard = ({
                 </div>
 
                 {/* Content */}
-                <div className="relative z-10 space-y-6 flex flex-col h-full">
+                <div className="relative z-10 space-y-6 flex flex-col">
                     <div className="space-y-2">
                         <div className={`w-12 h-1 bg-brand-accent transition-all duration-500 ${isHovered ? "w-24" : "w-12"}`} />
                         <h3 className="text-2xl font-bold tracking-tight text-white">{title}</h3>
@@ -176,7 +174,7 @@ const SolutionCard = ({
                         {description}
                     </p>
 
-                    <div className="space-y-3 pt-4 border-t border-white/10 flex-grow">
+                    <div className="space-y-3 pt-4 border-t border-white/10">
                         {features.map((feature, i) => (
                             <motion.div
                                 key={i}
@@ -192,16 +190,6 @@ const SolutionCard = ({
                             </motion.div>
                         ))}
                     </div>
-
-                    <motion.button
-                        whileHover={{ x: 5 }}
-                        className="flex items-center gap-2 text-brand-accent text-xs font-bold uppercase tracking-widest pt-4 group-hover:gap-4 transition-all mt-auto"
-                    >
-                        {cta}
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M17 8l4 4m0 0l-4 4m4-4H3" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
-                        </svg>
-                    </motion.button>
                 </div>
 
                 <div className={`absolute -bottom-10 left-1/2 -translate-x-1/2 w-4/5 h-20 bg-brand-accent/5 blur-[50px] transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"}`} />
@@ -223,8 +211,7 @@ const Solutions = () => {
                 "SEO Optimization",
                 "Performance Focus"
             ],
-            image: "/webdev.png",
-            cta: "Explore Websites"
+            image: "/webdev.png"
         },
         {
             title: "Web Applications & SaaS",
@@ -235,8 +222,7 @@ const Solutions = () => {
                 "custom chatbots",
                 "Secure Access Control"
             ],
-            image: "/webapp.png",
-            cta: "View Web Apps"
+            image: "/webapp.png"
         },
         {
             title: "E-commerce Platforms",
@@ -247,8 +233,7 @@ const Solutions = () => {
                 "Multi-Vendor Setup",
                 "Analytics"
             ],
-            image: "/ecom.png",
-            cta: "Explore E-commerce"
+            image: "/ecom.png"
         },
         {
             title: "Business Automation",
@@ -259,8 +244,7 @@ const Solutions = () => {
                 "API Integration",
                 "Lead Management"
             ],
-            image: "/auto.png",
-            cta: "See Automation"
+            image: "/auto.png"
         }
     ];
 
