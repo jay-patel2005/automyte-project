@@ -16,9 +16,20 @@ const Navbar = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isMobileMenuOpen]);
+
     return (
         <nav
-            className={`fixed top-0 left-0 w-full z-[999] transition-all duration-500 px-6 ${isScrolled ? "glass-morphism py-3" : "py-4"
+            className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-500 px-6 ${isScrolled ? "glass-morphism py-3" : "py-4"
                 }`}
             id="navbar"
         >
@@ -62,10 +73,10 @@ const Navbar = () => {
 
             {/* Mobile Menu Drawer */}
             <div
-                className={`fixed inset-0 z-[60] bg-gray-900 transition-transform duration-300 ease-out md:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+                className={`fixed inset-0 z-[1001] bg-brand-bg transition-transform duration-300 ease-out md:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
                     }`}
             >
-                <div className="flex flex-col h-full p-8">
+                <div className="flex flex-col h-full p-8 overflow-y-auto">
                     <div className="flex justify-between items-center mb-12">
                         <div className="flex items-center gap-3">
                             <div className="relative h-12 w-12">
@@ -87,16 +98,18 @@ const Navbar = () => {
                             </svg>
                         </button>
                     </div>
-                    <div className="flex flex-col gap-8 text-2xl font-bold">
-                        <Link href="#home" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-brand-accent transition-colors">Home</Link>
-                        <Link href="#about" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-brand-accent transition-colors">About</Link>
-                        <Link href="#solutions" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-brand-accent transition-colors">Solutions</Link>
-                        <Link href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-brand-accent transition-colors">Projects</Link>
-                        <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-brand-accent transition-colors">Contact</Link>
+                    <div className="flex flex-col gap-6 text-2xl font-bold">
+                        <Link href="#home" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-brand-accent transition-colors py-2 border-b border-white/5">Home</Link>
+                        <Link href="#about" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-brand-accent transition-colors py-2 border-b border-white/5">About</Link>
+                        <Link href="#solutions" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-brand-accent transition-colors py-2 border-b border-white/5">Solutions</Link>
+                        <Link href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-brand-accent transition-colors py-2 border-b border-white/5">Projects</Link>
+                        <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-brand-accent transition-colors py-2 border-b border-white/5">Contact</Link>
                     </div>
-                    <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="mt-auto px-6 py-4 bg-brand-accent text-brand-bg rounded-twelve font-bold uppercase tracking-widest text-sm text-center">
-                        Get Started
-                    </Link>
+                    <div className="mt-12">
+                        <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block w-full px-6 py-4 bg-brand-accent text-brand-bg rounded-twelve font-bold uppercase tracking-widest text-sm text-center">
+                            Get Started
+                        </Link>
+                    </div>
                 </div>
             </div>
         </nav>
